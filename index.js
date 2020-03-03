@@ -18,7 +18,7 @@ var sp_options = {
     entity_id: "https://sp.example.com/metadata.xml",
     private_key: fs.readFileSync("./cert/key.pem").toString(),
     certificate: fs.readFileSync("./cert/xcert.crt").toString(),
-    assert_endpoint: "localhost:3000/assert",
+    assert_endpoint: "https://ss-federated.herokuapp.com/assert",
     force_authn: true,
     auth_context: { comparison: "exact", class_refs: ["urn:oasis:names:tc:SAML:1.0:am:password"] },
     nameid_format: "urn:oasis:names:tc:SAML:2.0:nameid-format:transient",

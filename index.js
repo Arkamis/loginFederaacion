@@ -3,9 +3,15 @@ var fs = require('fs');
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
+const path = require('path');
+const port = process.env.PORT || 3000;
 app.use(bodyParser.urlencoded({
   extended: true
 }));
+
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
+
  
 // Create service provider
 var sp_options = {
@@ -31,7 +37,7 @@ var sp = new saml2.ServiceProvider(sp_options);
 var idp = "";
 // ------ Define express endpoints ------
  
-// Endpoint to retrieve metadata
+// Endpoint to retrieve metadata need middleware
 app.get("/metadata.xml", function(req, res) {
   res.type('application/xml');
   res.send(sp.create_metadata());
@@ -76,6 +82,6 @@ app.get("/logout", function(req, res) {
   });
 });
  
-app.listen(3000, () => {
-    console.log('Server running port 3000')
+app.listen(port, () => {
+    console.log(`Server running port ${port}`);
 });

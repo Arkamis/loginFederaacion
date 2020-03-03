@@ -1,0 +1,225 @@
+<!-- <%# 
+  <div class="card-columns py-3 ml-1 mr-1">
+    <div class="card">
+      <div class="card-header text-right p-1">
+        <p class="text-muted m-1"><i class="fas fa-clock mr-2 noti-t3"></i>Viernes, 12/12/19</p>
+      </div>
+      <img src="/img/notiBuilder/noticia1.png" class="card-img-top" alt="...">
+      <div class="card-body text-left px-2">
+          <h6 class="card-title text-truncate text-capitalize noti-t2 text-monospace">U.D.C Crea Website</h6>
+          <p class="card-text text-justify text-secondary px-2 clampThis">
+              With supporting text 
+              below as a natural lead-in to additional content. 
+              Below as a natural lead-in to additional content.below as a natural lead-in to additional 
+              content.below as a natural lead-in to additional content.
+          </p>
+      </div>
+      <div class="collapse" id="collapse-collapsed01" aria-labelledby="heading-collapsed">
+          <div class="list-group list-group-flush">
+              <button type="button" class="list-group-item list-group-item-action noti-t4"><i class="far fa-edit noti-t3 mr-2"></i>Editar</button>
+              <button type="button" class="list-group-item list-group-item-action noti-t4"><i class="far fa-trash-alt noti-t3 mr-2"></i>Eliminar</button>
+              <button type="button" class="list-group-item list-group-item-action noti-t4"><i class="far fa-eye noti-t3 mr-2"></i>Visualizar</button>
+          </div>
+      </div>
+      <div class="card-footer">
+          <a class="collapsed d-block card-link noti-t3" data-toggle="collapse" href="#collapse-collapsed01" aria-expanded="true" aria-controls="collapse-collapsed">
+          Opciones... 
+              <i class="fas fa-angle-up ml-1"></i>
+          </button>
+      </div>
+    </div>
+  </div>
+%>  -->
+<section class="container-fluid">
+  <h3>Crear una noticia Nueva 
+    <a id="createNew" data-toggle="collapse" data-target="#addNoticia" role="button" aria-controls="addNoticia" href="#" class="btn">
+    <i class="fas fa-plus-circle noti-t3" data-toggle="tooltip" data-placement="right" title="Crear una noticia nueva"></i>
+    </a>
+  </h3>
+  <div class="row bg-light">
+    <div class="col-12">
+      <div class="container shadow rounded my-4 p-4 collapse " id="addNoticia">
+        <form action="/noticia/addNoticia" enctype="multipart/form-data" method="POST" >
+          <fieldset class="form-group row">
+            <legend>Encabezado</legend>
+            <div class="col-12 mb-3">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">Volanta</span>
+                  <input type="text" name="volanta" class="form-control" placeholder="Volanta de la noticia" maxlength="30">
+                </div>
+              </div>
+            </div>
+            <div class="col-12 mb-2">
+              <div class="input-group-lg">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">Titulo</span>
+                  <input type="text" name="titulo" class="form-control" placeholder="Titulo de la noticia" maxlength="60">
+                </div>
+              </div>
+            </div>
+            <div class="col-12 mb-4">
+              <div class="input-group-sm">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">Copete</span>
+                  <textarea name="copete" class="form-control" placeholder="Copete de la noticia, una breve introduccion..." maxlength="150"></textarea>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+          <fieldset class="form-group row">
+            <legend>Multimedia</legend>
+            <div class="col-12 mb-3">
+              <img src="#" alt="Inserta Una imagen para tu noticia..." id="imgNoti">  
+            </div>
+            <div class="col-12 epigrafe">
+              <div class="input-group mb-4">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">Epígrafe</span>
+                  <textarea type="text" name="epigrafe" class="form-control" placeholder="Describe la imagen..."></textarea>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 mb-4">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">Foto</span>
+                  <input type="file" name="foto" class="form-control" placeholder="Buscar Imagenes" id="imgInput" accesskey="f"/>
+                  <label for="imgInput" id="imgName" class="mx-2 px-1">Seleccionar fotografia...</label>
+                  <a id="imgButton" class="btn btn-outline-dark"><i class="far fa-image"></i></a>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+          <fieldset class="form-group row">
+            <legend>Contenido Restante</legend>
+            <div class="col-12">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">Cuerpo</span>
+                  <textarea id="cuerpo" type="text" name="cuerpo" class="form-control" placeholder="Desarrolla tu noticia, de lo mas importante..."></textarea>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+          <div class="row justify-content-center">
+            <div class="col-7 align-items-end">
+              <button type="button" class="btn btn-outline-warning btn-sm my-auto">Limpiar</button>
+              <button id="cancelNew" type="button" class="btn btn-outline-danger btn-sm " data-toggle="collapse" data-target="#addNoticia">Cancelar</button>
+            </div>
+            <div class="col-auto">
+              <button type="submit" class="btn btn-success btn-lg">Crear Noticia</button>
+            </div>            
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <hr>
+</section>
+<section class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <h3 class=" text-dark my-3 mr-2">Tus noticias...</h3> 
+    </div>
+  </div>  
+  <div class="row">
+    <div class="col-md-4 col-sm-8 col-12 mb-4">
+      <div class="card">
+        <div class="card-header p-0">
+          <div class="list-group list-group-horizontal-xl mw-100">
+            <button type="button" class="list-group-item list-group-item-action flex-even noti-t4"><i class="far fa-edit noti-t3 mr-2"></i>Editar</button>
+            <button type="button" class="list-group-item list-group-item-action flex-even noti-t4"><i class="far fa-trash-alt noti-t3 mr-2"></i>Eliminar</button>
+            <button type="button" class="list-group-item list-group-item-action flex-even noti-t4"><i class="far fa-eye noti-t3 mr-2"></i>Visualizar</button>
+          </div>
+        </div>
+        <img src="/img/notiBuilder/noticia1.png" class="card-img-top" alt="...">
+        <div class="card-body text-left px-3">
+          <h5 class="card-title text-truncate text-capitalize noti-t2 text-monospace">U.D.C Crea Website</h5>
+          <p class="card-text text-justify text-secondary px-2 clampThis">
+              With supporting text 
+              below as a natural lead-in to additional content. 
+              Below as a natural lead-in to additional content.below as a natural lead-in to additional 
+              content.below as a natural lead-in to additional content.
+          </p>
+        </div>
+        <div class="card-footer text-right p-1">
+          <small class="text-muted p-1"><i class="fas fa-clock mr-2 noti-t3"></i>Viernes, 12/12/19</small>
+        </div>
+      </div>  
+    </div>
+    <div class="col-md-4 col-sm-8 col-12 mb-4">
+      <div class="card">
+        <div class="card-header text-right p-1 ">
+          <small class="text-muted p-1"><i class="fas fa-clock mr-2 noti-t3"></i>Viernes, 12/12/19</small>
+        </div>
+        <img src="/img/notiBuilder/noticia1.png" class="card-img-top" alt="...">
+        <div class="card-body text-left px-3">
+          <h5 class="card-title text-truncate text-capitalize noti-t2 text-monospace">U.D.C Crea Website</h5>
+          <p class="card-text text-justify text-secondary px-2 clampThis">
+              With supporting text 
+              below as a natural lead-in to additional content. 
+              Below as a natural lead-in to additional content.below as a natural lead-in to additional 
+              content.below as a natural lead-in to additional content.
+          </p>
+        </div>
+        <div class="card-footer  p-0">
+          <div class="d-flex flex-row flex-sm-wrap">
+            <button type="button" class="list-group-item list-group-item-action flex-even bg-warning text-white"><i class="far fa-edit mr-2"></i>Editar</button>
+            <button type="button" class="list-group-item list-group-item-action flex-even bg-danger text-white"><i class="far fa-trash-alt mr-2"></i>Eliminar</button>
+            <button type="button" class="list-group-item list-group-item-action flex-even bg-success text-white"><i class="far fa-eye mr-2"></i>Visualizar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 col-sm-8 col-12 mb-4">
+      <div class="card">
+        <div class="card-header p-0">
+          <div class="d-flex flex-row list-group list-group-horizontal-xl mw-100 ">
+            <button type="button" class="list-group-item list-group-item-action flex-even bg-warning text-white"><i class="far fa-edit mr-2"></i>Editar</button>
+            <button type="button" class="list-group-item list-group-item-action flex-even bg-danger text-white"><i class="far fa-trash-alt mr-2"></i>Eliminar</button>
+            <button type="button" class="list-group-item list-group-item-action flex-even bg-success text-white"><i class="far fa-eye mr-2"></i>Visualizar</button>
+          </div>
+        </div>
+        <img src="/img/notiBuilder/noticia1.png" class="card-img-top" alt="...">
+        <div class="card-body text-left px-3">
+          <h5 class="card-title text-truncate text-capitalize noti-t2 text-monospace">U.D.C Crea Website</h5>
+          <p class="card-text text-justify text-secondary px-2 clampThis">
+              With supporting text 
+              below as a natural lead-in to additional content. 
+              Below as a natural lead-in to additional content.below as a natural lead-in to additional 
+              content.below as a natural lead-in to additional content.
+          </p>
+        </div>
+        <div class="card-footer text-right p-1">
+          <small class="text-muted p-1"><i class="fas fa-clock mr-2 noti-t3"></i>Viernes, 12/12/19</small>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 col-sm-8 col-12 mb-4">
+      <div class="card">
+        <div class="card-header p-0">
+          <div class="d-flex flex-row list-group list-group-horizontal-xl mw-100 ">
+            <button type="button" class="list-group-item list-group-item-action flex-even bg-warning text-white"><i class="far fa-edit mr-2"></i>Editar</button>
+            <button type="button" class="list-group-item list-group-item-action flex-even bg-danger text-white"><i class="far fa-trash-alt mr-2"></i>Eliminar</button>
+            <button type="button" class="list-group-item list-group-item-action flex-even bg-success text-white"><i class="far fa-eye mr-2"></i>Visualizar</button>
+          </div>
+        </div>
+        <img src="/img/notiBuilder/noticia1.png" class="card-img-top" alt="...">
+        <div class="card-body text-left px-3">
+          <h5 class="card-title text-truncate text-capitalize noti-t2 text-monospace">U.D.C Crea Website</h5>
+          <p class="card-text text-justify text-secondary px-2 clampThis">
+              With supporting text 
+              below as a natural lead-in to additional content. 
+              Below as a natural lead-in to additional content.below as a natural lead-in to additional 
+              content.below as a natural lead-in to additional content.
+          </p>
+        </div>
+        <div class="card-footer text-right p-1">
+          <small class="text-muted p-1"><i class="fas fa-clock mr-2 noti-t3"></i>Viernes, 12/12/19</small>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</div>

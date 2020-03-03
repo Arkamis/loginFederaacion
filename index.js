@@ -28,13 +28,13 @@ var sp_options = {
 var sp = new saml2.ServiceProvider(sp_options);
  
 // Create identity provider
-// var idp_options = {
-//   sso_login_url: "https://idp.example.com/login",
-//   sso_logout_url: "https://idp.example.com/logout",
-//   certificates: [fs.readFileSync("cert-file1.crt").toString(), fs.readFileSync("cert-file2.crt").toString()]
-// };
-// var idp = new saml2.IdentityProvider(idp_options);
-var idp = "";
+var idp_options = {
+  sso_login_url: "https://wayf.ucol.mx/saml2/idp/SingleLogoutService.php",
+  sso_logout_url: "https://wayf.ucol.mx/saml2/idp/SSOService.php",
+  certificates: [fs.readFileSync("./cert/idp.crt").toString()]
+};
+
+var idp = new saml2.IdentityProvider(idp_options);
 // ------ Define express endpoints ------
  
 // Endpoint to retrieve metadata need middleware
@@ -61,10 +61,10 @@ app.post("/assert", function(req, res) {
  
     // Save name_id and session_index for logout
     // Note:  In practice these should be saved in the user session, not globally.
-    name_id = saml_response.user.name_id;
-    session_index = saml_response.user.session_index;
- 
-    res.send("Hello #{saml_response.user.name_id}!");
+    // name_id = saml_response.user.name_id;
+    // session_index = saml_response.user.session_index;
+    console.log(saml_response)
+    res.send("Gracias!!");
   });
 });
  

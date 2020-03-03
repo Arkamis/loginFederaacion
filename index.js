@@ -23,7 +23,7 @@ var sp_options = {
     auth_context: { comparison: "exact", class_refs: ["urn:oasis:names:tc:SAML:1.0:am:password"] },
     nameid_format: "urn:oasis:names:tc:SAML:2.0:nameid-format:transient",
     sign_get_request: true,
-    allow_unencrypted_assertion: true
+    allow_unencrypted_assertion: false
 }
 var sp = new saml2.ServiceProvider(sp_options);
  

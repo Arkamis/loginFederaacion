@@ -5,6 +5,7 @@ var app = express();
 var bodyParser = require('body-parser');
 const path = require('path');
 const port = process.env.PORT || 3000;
+
 app.use(bodyParser.urlencoded({
   extended: true
 }));
@@ -20,8 +21,6 @@ var sp_options = {
     certificate: fs.readFileSync("./cert/xcert.crt").toString(),
     assert_endpoint: "https://ss-federated.herokuapp.com/assert",
     force_authn: true,
-    auth_context: { comparison: "exact", class_refs: ["urn:oasis:names:tc:SAML:1.0:am:password"] },
-    nameid_format: "urn:oasis:names:tc:SAML:2.0:nameid-format:transient",
     sign_get_request: true,
     allow_unencrypted_assertion: false
 }
@@ -29,8 +28,8 @@ var sp = new saml2.ServiceProvider(sp_options);
  
 // Create identity provider
 var idp_options = {
-  sso_login_url: "https://wayf.ucol.mx/saml2/idp/SingleLogoutService.php",
-  sso_logout_url: "https://wayf.ucol.mx/saml2/idp/SSOService.php",
+  sso_login_url: "https://wayf.ucol.mx/saml2/idp/SSOService.php",
+  sso_logout_url: "https://wayf.ucol.mx/saml2/idp/SingleLogoutService.php",
   certificates: [fs.readFileSync("./cert/idp.crt").toString()]
 };
 
@@ -45,11 +44,18 @@ app.get("/metadata.xml", function(req, res) {
  
 // Starting point for login
 app.get("/login", function(req, res) {
-  sp.create_login_request_url(idp, {}, function(err, login_url, request_id) {
-    if (err != null)
-      return res.send(500);
-    res.redirect(login_url);
-  });
+  console.log('ENtre a login', sp);
+  try{
+    sp.create_login_request_url(idp, {}, function(err, login_url, request_id) {
+      if (err){
+        console.log("Error:", err.message);
+        return res.send(500);
+      }
+      res.redirect(login_url);
+    });
+  } catch(err){
+    console.log("Error en el metodo")
+  }
 });
  
 // Assert endpoint for when login completes
@@ -83,5 +89,5 @@ app.get("/logout", function(req, res) {
 });
  
 app.listen(port, () => {
-    console.log(`Server running port ${port}`);
+	console.log(`Server running port ${port}`);
 });

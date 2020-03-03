@@ -15,7 +15,7 @@ app.set('view engine', 'ejs');
  
 // Create service provider
 var sp_options = {
-    entity_id: "https://sp.example.com/metadata.xml",
+    entity_id: "https://ss-federated.herokuapp.com/metadata.xml",
     private_key: fs.readFileSync("./cert/key.pem").toString(),
     certificate: fs.readFileSync("./cert/xcert.crt").toString(),
     assert_endpoint: "https://ss-federated.herokuapp.com/assert",

@@ -76,11 +76,15 @@ app.post("/assert", function(req, res) {
  
 // Starting point for logout
 app.get("/logout", function(req, res) {
-  sp.create_logout_request_url(idp, options, function(err, logout_url) {
+  // var options = {
+  //   name_id: name_id,
+  //   session_index: session_index
+  // };
+ 
+  sp.create_logout_request_url(idp, {}, function(err, logout_url) {
     if (err != null)
       return res.send(500);
     res.redirect(logout_url);
-    console.log("Logged out correctly!");
   });
 });
  

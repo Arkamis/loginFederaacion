@@ -1,43 +1,10 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <% include ./partials/head %>
+  <%- include('partials/head'); %>
   <title>NotiBuilder</title>
+  <link rel="stylesheet" href="/stylesheets/login.css">
 </head>
-<style>
-  body, html{
-    background: #30E8BF;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #FF8235, #30E8BF);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #FF8235, #30E8BF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    height:100%;
-  }
-  img {
-    max-width:50%;
-  }
-  .formulario {
-    width: 350px;
-    max-width: 500px;
-    background-color: #E8E8E8;
-  }
-  .img-logo{
-    position: relative;
-    top: -50px;
-  }
-  .input-group-text{
-    background-color: #954811 ;
-  }
-  .input-group-prepend i{
-    color: #ffffff;
-  }
-  .btn-login{
-    background-color: #954811;
-    color: #fff;
-  }
-  .btn-login:hover{
-    background-color: #954811;
-    color: #fff;
-  }
-</style>
 <body>
   <div class="container h-100">
     <div class="d-flex h-100 justify-content-center">
@@ -62,16 +29,24 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="fas fa-unlock-alt"></i></span>
                 </div>
-                <input type="password" class="form-control" name="password" id="passowrd" placeholder="Contrasena" required>
+                <input type="password" class="form-control" name="password" id="password" placeholder="Contrasena" required>
             </div>
           </div>
           <div class="d-flex flex-column my-4 flex-wrap">
-            <button type="submit" class="btn btn-login align-self-center">Ingresar</button>
+            <button type="submit" class="btn btn-login align-self-center btn-block btn-lg">Ingresar</button>
           </div>
         </form>
+        <div class="d-flex">
+          <hr class="hr-log">
+          <p>or</p>
+          <hr class="hr-log">
+        </div>
+        <div class=" d-flex align-items-center my-2">
+          <a type="button" class="btn btn-secondary btn-block btn-lg" id="ucolSign" href="/fed/login">Ingresar con UCOL</a>
+        </div>
       </div>
     </div>
   </div>
-  <% include ./partials/scripts%>
+  <%- include('./partials/scripts'); %>
 </body>
 </html>

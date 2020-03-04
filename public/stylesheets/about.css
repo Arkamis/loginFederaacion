@@ -1,0 +1,14 @@
+@media screen and (max-width: 1200px) {
+    .container {
+        width: 80%;
+    }
+}
+
+@media screen and (max-width: 600px) {
+   .container{
+       width: 100%;
+   }
+   .adjTop{
+       margin-top: .5rem;
+   }
+}

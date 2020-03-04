@@ -1,0 +1,32 @@
+body, html{
+    background: #30E8BF; 
+    background: -webkit-linear-gradient(to right, #FF8235, #30E8BF);  
+    background: linear-gradient(to right, #FF8235, #30E8BF);
+    height:100%;
+  }
+  img {
+    max-width:50%;
+  }
+  .formulario {
+    width: 350px;
+    max-width: 500px;
+    background-color: #E8E8E8;
+  }
+  .img-logo{
+    position: relative;
+    top: -50px;
+  }
+  .input-group-text{
+    background-color: #954811 ;
+  }
+  .input-group-prepend i{
+    color: #ffffff;
+  }
+  .btn-login{
+    background-color: #954811;
+    color: #fff;
+  }
+  .btn-login:hover{
+    background-color: #954811;
+    color: #fff;
+  }

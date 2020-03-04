@@ -1,0 +1,21 @@
+@media screen and (max-width: 1200px) {
+    .container {
+        width: 80%;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .container {
+        width: 100%;
+    }
+}
+
+.contColor{
+    background-color: #f1efef;
+}
+
+.effect
+{
+  	position:relative;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}

@@ -45,27 +45,30 @@ const signIn = (req, res) => {
 const assert = (req, res) => {
     const options = {request_body: req.body};
     sp.post_assert(idp, options, function(err, saml_response) {
-        if (err != null)
-        return res.send(500);
+        if (err){
+            return res.send(500);
+        }
         
         // Save name_id and session_index for logout
         // Note:  In practice these should be saved in the user session, not globally.
         // name_id = saml_response.user.name_id;
         // session_index = saml_response.user.session_index;
+        
         console.log(saml_response)
-        res.send("Gracias!!");
+        res.stats(200).send(saml_response.user);
     });
 }
 
 const signOut = (req, res) => {
-    // var options = {
-    //   name_id: name_id,
-    //   session_index: session_index
-    // };
+    var options = {
+      name_id: name_id,
+      session_index: session_index
+    };
     
-    sp.create_logout_request_url(idp, {}, function(err, logout_url) {
-        if (err != null)
-        return res.send(500);
+    sp.create_logout_request_url(idp, {options}, function(err, logout_url) {
+        if (err){
+            return res.send(500);
+        }
         res.redirect(logout_url);
     });
 }

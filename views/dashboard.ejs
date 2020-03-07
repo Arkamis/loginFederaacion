@@ -2,7 +2,7 @@
 <html lang="es">
   <head>
     <title>NotiBuilder -Dashboard</title>
-    <% include ./partials/head %>
+    <%- include('partials/head'); %>
     <link rel="stylesheet" type="text/css" href="/stylesheets/NotiBuilder/css/dashboard.css">
   </head>
 
@@ -49,21 +49,21 @@
       <article class="container-fluid mt-4">
         <% switch (area) {
           case 'usuarios': %>
-            <% include ./admin/usuarios %>
+            <%- include('admin/usuarios'); %>
             <% break;
           case 'sponsors': %>
-            <% include ./admin/sponsors %>
+            <%- include('admin/sponsors'); %>
              <% break;
           case 'noticias': %>
-          <% include ./admin/noticias %>
+          <%- include('admin/noticias'); %>
             <% break;
           case 'perfil': %>
-          <% include ./admin/perfil %>
+          <%- include('admin/perfil', {user}); %>
             <% break;
         } %>
       </article>
     </section>
-    <% include ./partials/scripts %> 
+    <%- include('partials/scripts'); %> 
     <script src="/javascripts/notiBuilder/dashboard.js">
     </script>
   </body>

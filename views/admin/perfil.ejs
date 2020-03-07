@@ -1,1 +1,17 @@
-<div>PErfil pAgE</div>
+<div>
+	<div class="card">
+		<h5 class="card-header">Usuario UCOL</h5>
+		<div class="card-body">
+			<h5 class="card-title">Datos personales</h5>
+			<div class="card-text">
+				<% if (user) { %>
+					<ul>
+						<li>Nombre:<%= user.name %> </li>
+						<li>correo:<%= user.email %> </li>
+						<li>Cuenta:<%= user.nAccount %> </li>
+					</ul>
+				<% } %>
+			</div>
+		</div>
+	</div>
+</div>

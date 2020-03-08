@@ -3,8 +3,9 @@ const router = express.Router();
 
 const {signIn, signOut, assert, getMetaData} = require('../controllers/auth');
 //for controllers
-router.get('/login', signIn);
+router.get('/fed/login', signIn);
 router.get('/metadata.xml', getMetaData);
-router.get('/logout');
+router.get('/logout', signOut);
+router.get('/assert', assert)
 
 module.exports = router; 

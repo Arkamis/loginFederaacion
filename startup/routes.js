@@ -11,7 +11,7 @@ module.exports = function(app) {
     app.use('/users', usersRouter);
     app.use('/dashboard', dashboardRouter);
     app.use('/noticias', noticiasRouter);
-    app.use('/fed', authRouter);
+    app.use('/', authRouter);
     require('./DB/mongoose'); 
 
 }

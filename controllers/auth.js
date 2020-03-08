@@ -55,14 +55,19 @@ const assert = (req, res) => {
         // session_index = saml_response.user.session_index;
         
         console.log(saml_response)
-        res.stats(200).send(saml_response.user);
+        const user = {
+            name: saml_response.user.attibuttes.uNombre,
+            email: saml_response.user.attributes.uCorreo,
+            nAccount: saml_response.user.attibuttes.uCuenta
+        }
+        res.render('dashboard', {area: 'perfil', user});
     });
 }
 
 const signOut = (req, res) => {
     var options = {
-      name_id: name_id,
-      session_index: session_index
+      name_id: req.body.name_id,
+      session_index: req.body.session_index
     };
     
     sp.create_logout_request_url(idp, {options}, function(err, logout_url) {

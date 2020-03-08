@@ -4,10 +4,11 @@ const saltRounds = process.env.SALT_ROUNDS || 10;
 
 const userSchema = new Schema({
     name: {type: String, minlength: 5, maxlength: 40,trim:true, required: true},
-    password: {type: String, minlength: 8, required: true},
+    password: {type: String, minlength: 8},
     email: {type: String, minlength: 10, required: true, unique: true},
-    rol:{type:String, minlength: 3, enum:['directora', 'escritor', 'secretaria', 'apoyo']},
+    rol:{type:String, minlength: 3},
     profilePhotoUrl: {type: String, default:"https://"},
+    aNumber: {type: Number}
 },{timestamps: true, versionKey: false});
 
 const Users = model("users", userSchema);

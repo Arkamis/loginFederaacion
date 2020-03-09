@@ -1,20 +1,14 @@
 const {Schema, model} = require('mongoose');
-
+const bcrypt = require('bcrypt');
 const saltRounds = process.env.SALT_ROUNDS || 10;
 
 const userSchema = new Schema({
     name: {type: String, minlength: 5, maxlength: 40,trim:true, required: true},
     password: {type: String, minlength: 8},
     email: {type: String, minlength: 10, required: true, unique: true},
-<<<<<<< HEAD
     rol:{type:String, minlength: 3},
     profilePhotoUrl: {type: String, default:"https://"},
-    aNumber: {type: Number}
-=======
-    rol:{type:String, minlength: 3, enum:['directora', 'escritor', 'secretaria', 'apoyo', 'Estudiante', 'estudiante']},
-    profilePhotoUrl: {type: String, default:"https://"},
-    no_Cuenta: Number || String
->>>>>>> 79a6e101e59fb74fa6ebdac5ef5100a05010579b
+    nAccount: {type: Number}
 },{timestamps: true, versionKey: false});
 
 const Users = model("users", userSchema);

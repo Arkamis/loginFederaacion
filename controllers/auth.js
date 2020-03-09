@@ -14,9 +14,9 @@ const sp = new saml2.ServiceProvider(sp_options);
 //
 // Create identity provider
 const idp_options = {
-sso_login_url: "https://wayf.ucol.mx/saml2/idp/SSOService.php",
-sso_logout_url: "https://wayf.ucol.mx/saml2/idp/SingleLogoutService.php",
-certificates: [fs.readFileSync("./cert/idp.crt").toString()]
+    sso_login_url: "https://wayf.ucol.mx/saml2/idp/SSOService.php",
+    sso_logout_url: "https://wayf.ucol.mx/saml2/idp/SingleLogoutService.php",
+    certificates: [fs.readFileSync("./cert/idp.crt").toString()]
 };
 
 var idp = new saml2.IdentityProvider(idp_options);
@@ -51,16 +51,21 @@ const assert = (req, res) => {
         
         // Save name_id and session_index for logout
         // Note:  In practice these should be saved in the user session, not globally.
-        // name_id = saml_response.user.name_id;
-        // session_index = saml_response.user.session_index;
+        let name_id = saml_response.user.name_id;
+        let session_index = saml_response.user.session_index;
+
+        req.session.user = {name_id, session_index};
+
         
-        console.log(saml_response)
         const user = {
-            name: saml_response.user.attibuttes.uNombre,
+            name: saml_response.user.attibutes.uNombre,
             email: saml_response.user.attributes.uCorreo,
-            nAccount: saml_response.user.attibuttes.uCuenta
+            nAccount: saml_response.user.attibutes.uCuenta
         }
+        req.session.user.data = user;
+        
         res.render('dashboard', {area: 'perfil', user});
+
     });
 }
 

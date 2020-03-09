@@ -5,7 +5,12 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const port = process.env.PORT || 3000;
-
+var sess = {
+  secret: 'secret',
+  resave: false,
+  saveUninitialized: true,
+  cookie:{}
+}
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
@@ -16,12 +21,14 @@ app.use(bodyParser.urlencoded({
 
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(session({
-  secret: 'secret',
-  resave: false,
-  saveUninitialized: true,
-  cookie:{secure:true}
-}));
+
+if (app.get('env') === 'production') {
+  app.set('trust proxy', 1) // trust first proxy
+  sess.cookie.secure = true // serve secure cookies
+}
+
+app.use(session(sess));
+
 //setup routes & db connection
 require('./startup/routes')(app);
 

@@ -3,12 +3,9 @@ const userController = require('../controllers/user.controller');
 var router = express.Router();
 
 /* GET users listing. */
-router.route('login')
-    .get('/login', function(req, res, next) {
-        console.log('hi')
-        res.render('login');
-    })
-    .post('/login', userController.userLogin);
+router.route('/login')
+    .get(userController.all)
+    .post(userController.userLogin);
 
 // router.get('/logout', (req, res, next) => {
 //   //query a mongo para sacar token

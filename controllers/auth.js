@@ -44,6 +44,7 @@ const signIn = (req, res) => {
 
 const assert = (req, res) => {
     const options = {request_body: req.body};
+    console.log(req.body);
     sp.post_assert(idp, options, function(err, saml_response) {
         if (err){
             return res.send(500);
@@ -55,7 +56,6 @@ const assert = (req, res) => {
         let session_index = saml_response.user.session_index;
 
         req.session.user = {name_id, session_index};
-
         
         const user = {
             name: saml_response.user.attibutes.uNombre,
@@ -71,8 +71,8 @@ const assert = (req, res) => {
 
 const signOut = (req, res) => {
     var options = {
-      name_id: req.body.name_id,
-      session_index: req.body.session_index
+      name_id: req.session.user.name_id,
+      session_index: req.session.user.session_index
     };
     
     sp.create_logout_request_url(idp, {options}, function(err, logout_url) {

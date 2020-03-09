@@ -23,4 +23,4 @@ const userLogin = (req, res) => {
     }
 }
 
-module.exports = userLogin;
+module.exports = {userLogin};

@@ -1,35 +1,14 @@
 var express = require('express');
+const userController = require('../controllers/user.controller');
 var router = express.Router();
 
 /* GET users listing. */
-// router.get('/login', function(req, res, next) {
-//   console.log('hi')
-//   res.render('login');
-// });
-
-// router.post('/login', (req,res, next) => {
-//   const User = {
-//     name: 'test@123',
-//     password: '123'
-//   };
-
-//   let user = req.body.email;
-//   let password = req.body.password;
-//   if(User.name == user && User.password == password){
-//     //res.render('dashboard', {user});
-//     console.log('User:' + user + '\nPassword:' + password)
-//     res.status(201);
-//     res.render('dashboard', {area: 'noticias'});
-//   } else {
-//     let error = Error();
-//     error.message = 'error en credenciales';
-//     error.name = "ACCESS ERROR";
-
-//     console.log('Mi error creado: ', error.name);
-//     res.status(301)
-//     next(error);
-//   }
-// });
+router.route('login')
+    .get('/login', function(req, res, next) {
+        console.log('hi')
+        res.render('login');
+    })
+    .post('/login', userController.userLogin);
 
 // router.get('/logout', (req, res, next) => {
 //   //query a mongo para sacar token

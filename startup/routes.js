@@ -8,7 +8,7 @@ const {getPage, errorHandler} = require('../routes/errorhandler');
 module.exports = function(app) {
     //connect to DB
     //routes
-    app.use('/users', usersRouter);
+    app.use('/', usersRouter);
     app.use('/dashboard', dashboardRouter);
     app.use('/noticias', noticiasRouter);
     app.use('/', authRouter);

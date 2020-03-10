@@ -56,7 +56,9 @@ const assert = (req, res) => {
         const user = {
             name: saml_response.user.attributes.uNombre,
             email: saml_response.user.attributes.uCorreo,
-            nAccount: saml_response.user.attributes.uCuenta
+            nAccount: saml_response.user.attributes.uCuenta,
+            rol: saml_response.user.attributes.uTipo,
+            dependency: saml_response.user.attributes.uDependencia
         }
         req.session.regenerate(function(err) {
             // will have a new session here

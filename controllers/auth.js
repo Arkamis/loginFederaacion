@@ -47,25 +47,23 @@ const assert = (req, res) => {
         if (err){
             return res.send('Error');
         }
-        console.log(saml_response);
         // Save name_id and session_index for logout
         // Note:  In practice these should be saved in the user session, not globally.
         let name_id = saml_response.user.name_id;
         let session_index = saml_response.user.session_index;
 
         req.session.user = {name_id, session_index};
-        try {
+   
             
-            const user = {
-                name: saml_response.user.attributes.uNombre,
-                email: saml_response.user.attributes.uCorreo,
-                nAccount: saml_response.user.attributes.uCuenta
-            }
-            req.session.user.data = user;
-        } catch (error) {
-            res.statusCode(500).send('Error', error.message)
+        const user = {
+            name: saml_response.user.attributes.uNombre,
+            email: saml_response.user.attributes.uCorreo,
+            nAccount: saml_response.user.attributes.uCuenta
         }
-        
+        req.session.user.data = user;
+    
+        // res.statuCode(500).send('Error', error.message)
+    
         res.render('dashboard', {area: 'perfil', user});
 
     });

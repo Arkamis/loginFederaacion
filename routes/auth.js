@@ -6,6 +6,6 @@ const {signIn, signOut, assert, getMetaData} = require('../controllers/auth');
 router.get('/fed/login', signIn);
 router.get('/metadata.xml', getMetaData);
 router.get('/logout', signOut);
-router.post('/assert', assert)
+router.post('/assert', assert);
 
 module.exports = router; 

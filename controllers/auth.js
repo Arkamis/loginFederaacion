@@ -37,7 +37,7 @@ const signIn = (req, res) => {
         res.redirect(login_url);
         });
     } catch(err){
-        console.log("Error en el metodo")
+        console.log("Error en el metodo");
     }
 }
 
@@ -52,20 +52,22 @@ const assert = (req, res) => {
         let name_id = saml_response.user.name_id;
         let session_index = saml_response.user.session_index;
 
-        req.session.user = {name_id, session_index};
-   
-            
         const user = {
             name: saml_response.user.attributes.uNombre,
             email: saml_response.user.attributes.uCorreo,
             nAccount: saml_response.user.attributes.uCuenta
         }
-        req.session.user.data = user;
-    
+        req.session.regenerate(function(err) {
+            // will have a new session here
+            if(err){
+                return res.status(500).send('error', err.message);
+            }
+            req.session.user = {name_id, session_index};
+            req.session.user.data = user;
+            res.render('dashboard', {area: 'perfil', user});
+        });
         // res.statuCode(500).send('Error', error.message)
     
-        res.render('dashboard', {area: 'perfil', user});
-
     });
 }
 
@@ -79,7 +81,13 @@ const signOut = (req, res) => {
         if (err){
             return res.send(500);
         }
-        res.redirect(logout_url);
+        req.session.destroy(function(err) {
+            // cannot access session here
+            if(err){
+                res.status('500').send('error', err.message);
+            }
+            res.redirect(logout_url);
+        })
     });
 }
 

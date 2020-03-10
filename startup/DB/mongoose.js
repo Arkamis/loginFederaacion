@@ -8,4 +8,4 @@ mongoose.connect(uri,{ useUnifiedTopology: true, useNewUrlParser:true }, (err) =
     }else {
         console.log('Mongo DB connected')
     }
-})
+});

@@ -43,6 +43,7 @@ const signIn = (req, res) => {
 
 const assert = (req, res) => {
     const options = {request_body: req.body};
+    
     sp.post_assert(idp, options, function(err, saml_response) {
         if (err){
             return res.send('Error');
@@ -76,7 +77,25 @@ const signOut = (req, res) => {
       name_id: req.session.user.name_id,
       session_index: req.session.user.session_index
     };
-    
+    if(!req.session.user.data.nAccount){
+        try {
+            req.session.destroy();
+            console.log('Borre cookie');
+            return res.redirect('/login');            
+        } catch (error) {
+            console.log(error.message);
+            return res.status('500').send('error', error.message);
+        }
+        // req.session.destroy(function(err) {
+        //     // cannot access session here
+        //     if(err){
+        //         res.status('500').send('error', err.message);
+        //     }
+        //     console.log('Ya me desconecte!');
+        //     return res.redirect('/login');
+        // })
+    }
+    console.log('Estas son las opciones del signOut', options);
     sp.create_logout_request_url(idp, {options}, function(err, logout_url) {
         if (err){
             return res.send(500);
@@ -86,6 +105,7 @@ const signOut = (req, res) => {
             if(err){
                 res.status('500').send('error', err.message);
             }
+            console.log('Ya me desconecte!');
             res.redirect(logout_url);
         })
     });

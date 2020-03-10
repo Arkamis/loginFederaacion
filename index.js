@@ -4,12 +4,16 @@ var bodyParser = require('body-parser');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
+const mongoose = require('mongoose');
+const MongoStore = require('connect-mongo')(session);
 const port = process.env.PORT || 3000;
+
 var sess = {
   secret: 'secret',
   resave: false,
   saveUninitialized: true,
-  cookie:{}
+  cookie:{},
+  store: new MongoStore({ mongooseConnection: mongoose.connection })
 }
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');

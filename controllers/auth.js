@@ -47,7 +47,7 @@ const assert = (req, res) => {
     console.log(req.body);
     sp.post_assert(idp, options, function(err, saml_response) {
         if (err){
-            return res.send(500);
+            return res.send('Error');
         }
         
         // Save name_id and session_index for logout
